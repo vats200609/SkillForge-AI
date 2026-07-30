@@ -11,4 +11,4 @@ backend/.env
 frontend/node_modules/
 
 # macOS
-.DS_Store
+.DS_Storepip install "python-jose[cryptography]" "passlib[bcrypt]" python-multipart.DS_Store
