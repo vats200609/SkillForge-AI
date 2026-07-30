@@ -8,6 +8,7 @@ from app.security import (
     hash_password,
     verify_password,
     create_access_token,
+    get_current_user,
 )
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
@@ -76,4 +77,16 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
             "name": db_user.name,
             "email": db_user.email
         }
+    }
+
+
+# -----------------------------
+# Current Logged-in User
+# -----------------------------
+@router.get("/me")
+def get_me(current_user: User = Depends(get_current_user)):
+    return {
+        "id": current_user.id,
+        "name": current_user.name,
+        "email": current_user.email
     }

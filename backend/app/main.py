@@ -1,16 +1,22 @@
 from fastapi import FastAPI
 
 from app.api.auth import router as auth_router
-from app.database import engine, Base
-from app.models.user import User
+from app.database import Base, engine
 
-app = FastAPI(title="SkillForge AI API")
-
+# Database Tables Create
 Base.metadata.create_all(bind=engine)
 
+# FastAPI App
+app = FastAPI(
+    title="SkillForge AI API",
+    version="0.1.0"
+)
+
+# Routers
 app.include_router(auth_router)
 
 
+# Home API
 @app.get("/")
 def home():
     return {
